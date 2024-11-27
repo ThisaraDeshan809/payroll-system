@@ -1,0 +1,20 @@
+/* Write your custom CSS here */
+/* global */
+label {
+  font-weight: 700;
+}
+/* end global */
+.auth-form {
+  min-width: 370px;
+  max-width: 400px;
+  margin-top: 10%;
+}
+.form-control {
+  padding: 12px 25px;
+  height: auto;
+  border-radius: 0px;
+  border: 1px solid #e8e8e8;
+  font-size: 13px;
+  font-weight: 700;
+  color: #5c6662;
+}
