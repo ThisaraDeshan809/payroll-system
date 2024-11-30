@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="logo-box text-center">
-                                <img src="{{ asset('assets/images/logo/staane_logo.png') }}" width="50%">
+                                <img src="{{ asset('assets/images/logo/payroll-logo.png') }}" width="50%">
                                 <div><b>Where Expertise Meets Convenience</b> </div>
                             </div>
                             <form method="post" action="{{ route('login.submit') }}">
@@ -40,4 +40,4 @@
             </div> --}}
         </div>
     </div>
-</ @stop
+@stop

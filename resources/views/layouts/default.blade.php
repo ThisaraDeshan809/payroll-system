@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('includes.head')
 </head>
 
