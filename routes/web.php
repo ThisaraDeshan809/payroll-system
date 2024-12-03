@@ -9,19 +9,6 @@ use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'show')->name('login');
     Route::post('/login', 'login')->name('login.submit');
@@ -33,6 +20,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', 'index')->name('employee.index');
             Route::post('/upload-excel','uploadExcel')->name('employee.upload');
             Route::get('/get-employees','ajax_get_employees')->name('employee.get');
+            Route::post('/save-employee','ajax_employee_save');
+            Route::get('/get-employee','ajax_get_employee');
+            Route::post('/edit-employee','ajax_edit_employee');
+            Route::post('/delete-employee','ajax_delete_employee');
+            Route::get('/view-employee','ajax_view_employee');
         });
     });
 
