@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('designations', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
             $table->string('name');
-            $table->string('slug');
-            $table->text('description');
-            $table->integer('category_id');
-            $table->boolean('status')->default(0);
-            $table->bigInteger('created_by')->nullable();
-            $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('designations');
     }
 };

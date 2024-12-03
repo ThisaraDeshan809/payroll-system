@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('includes.head')
 </head>
 
@@ -23,9 +24,8 @@
             </div>
         </div>
         <footer>
-
-            @include('includes.footer')</footer>
-
+            @include('includes.footer')
+        </footer>
     </div>
 </body>
 

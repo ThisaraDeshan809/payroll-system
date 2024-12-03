@@ -1,7 +1,13 @@
 <div class="page-sidebar">
-    <div class="logo-box"><img src="{{ asset('assets/images/logo/staane_logo.png') }}" width="80%"><a href="#"
-            id="sidebar-close"><i class="material-icons">close</i></a> <a href="#" id="sidebar-state"><i
-                class="material-icons">adjust</i><i class="material-icons compact-sidebar-icon">panorama_fish_eye</i></a>
+    <div class="logo-box">
+        <img src="{{ asset('assets/images/logo/payroll-logo.png') }}" width="80%">
+        <a href="#" id="sidebar-close">
+            <i class="material-icons">close</i>
+        </a>
+        {{-- <a href="#" id="sidebar-state">
+            <i class="material-icons">adjust</i>
+            <i class="material-icons compact-sidebar-icon">panorama_fish_eye</i>
+        </a> --}}
     </div>
     <div class="page-sidebar-inner slimscroll">
         <ul class="accordion-menu">
@@ -9,79 +15,52 @@
                 Apps
             </li>
             <li class="active-page">
-                <a href="index.html" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+                <a href="/" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
             </li>
 
 
             <li>
-                <a href="#"><i class="material-icons">apps</i>Service Providers<i
+                <a href="#"><i class="material-icons">apps</i>Employees<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="">Create New</a>
-                    </li>
-                    <li>
-                        <a href="">Service Providers</a>
+                        <a href="{{route('employee.index')}}">Manage Employees</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">calendar_today</i> Meetings<i
+                <a href="#"><i class="material-icons">calendar_today</i>Day Workers<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
-                    {{-- <li>
-                        <a href="">Create New</a>
-                    </li> --}}
                     <li>
-                        <a href="">Manage Meetings</a>
+                        <a href="">Manage Day Workers</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">input</i>Categories<i
+                <a href="#"><i class="material-icons">input</i>Shift Workers<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="{{ route('category.new') }}">Create New</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('category.index') }}">Manage Categories</a>
+                        <a href="#">Manage Shift Workers</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">bookmark_border</i>Sub Categories<i
+                <a href="#"><i class="material-icons">bookmark_border</i>Security Members<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="">Create New</a>
-                    </li>
-                    <li>
-                        <a href="">Manage Categories</a>
+                        <a href="">Manage Security Members</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">access_time</i>Time Slots<i
+                <a href="#"><i class="material-icons">access_time</i>Drivers<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="">Create New</a>
-                    </li>
-                    <li>
-                        <a href="">Manage Slots</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons">map</i>Locations<i
-                        class="material-icons has-sub-menu">add</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="">Create New</a>
-                    </li>
-                    <li>
-                        <a href="">Manage Locations</a>
+                        <a href="">Manage Drivers</a>
                     </li>
                 </ul>
             </li>
@@ -106,12 +85,14 @@
                 </ul>
             </li>
             <li>
-                <a href="/elements"><i class="material-icons">bar_chart</i>Elements<i
+                <a href="#"><i class="material-icons">settings</i>Settings<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
-
                     <li>
-                        <a href="">Generate Reports</a>
+                        <a href="{{route('business.index')}}">Businesess</a>
+                    </li>
+                    <li>
+                        <a href="{{route('locations.index')}}">Locations</a>
                     </li>
                 </ul>
             </li>

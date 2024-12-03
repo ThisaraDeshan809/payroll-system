@@ -14,16 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->string('icon')->unique();
-            $table->text('description');
-            $table->boolean('status')->default(0);
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->id();
+            $table->string('name');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
