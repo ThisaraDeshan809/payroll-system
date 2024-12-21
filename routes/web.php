@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BusinessController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FactoryWorkerController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +50,35 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/get-location','ajax_get_location');
             Route::post('/edit-location','ajax_edit_location');
             Route::post('/delete-location','ajax_delete_location');
+        });
+    });
+
+    Route::controller(AttendanceController::class)->group(function () {
+        Route::prefix('employees/attendance')->group(function () {
+            Route::get('/', 'attendance_page')->name('attendance.index');
+            Route::post('/upload-attendance-sheet','uploadAttendance')->name('attendance.upload');
+            Route::get('/get-incomplete-attendances','ajax_get_incomplete_attendance');
+        });
+    });
+
+    Route::controller(SettingsController::class)->group(function () {
+        Route::prefix('settings')->group(function () {
+            Route::get('/', 'settings_page')->name('settings.index');
+        });
+    });
+
+    Route::controller(FactoryWorkerController::class)->group(function () {
+        Route::prefix('factory-workers')->group(function () {
+            Route::get('/', 'index')->name('factoryWorker.index');
+            Route::get('/calculate-factory-worker-salary','calculate_factory_worker_salary');
+        });
+    });
+
+    Route::controller(LoanController::class)->group(function () {
+        Route::prefix('employees/loans')->group(function () {
+            Route::get('/', 'index')->name('loans.index');
+            Route::post('save-loan','ajax_save_loan')->name('loan.save');
+            Route::get('/get-loans-table','ajax_get_loans_table')->name('loan.getLoans');
         });
     });
 

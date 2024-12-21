@@ -14,8 +14,8 @@
             <li class="sidebar-title">
                 Apps
             </li>
-            <li class="active-page">
-                <a href="/" class="active"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
+            <li class="">
+                <a href="/" class=""><i class="material-icons-outlined">dashboard</i>Dashboard</a>
             </li>
 
 
@@ -26,14 +26,20 @@
                     <li>
                         <a href="{{route('employee.index')}}">Manage Employees</a>
                     </li>
+                    <li>
+                        <a href="{{route('attendance.index')}}">Employee Attendance</a>
+                    </li>
+                    <li>
+                        <a href="{{route('loans.index')}}">Employee Loans</a>
+                    </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">calendar_today</i>Day Workers<i
+                <a href="#"><i class="material-icons">calendar_today</i>Factory Workers<i
                         class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="">Manage Day Workers</a>
+                        <a href="{{route('factoryWorker.index')}}">Manage Factory Workers</a>
                     </li>
                 </ul>
             </li>
@@ -93,6 +99,9 @@
                     </li>
                     <li>
                         <a href="{{route('locations.index')}}">Locations</a>
+                    </li>
+                    <li>
+                        <a href="{{route('settings.index')}}">Other Settings</a>
                     </li>
                 </ul>
             </li>
