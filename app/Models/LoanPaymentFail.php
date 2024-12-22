@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TempAttendance extends Model
+class LoanPaymentFail extends Model
 {
     use HasFactory;
 
-    protected $table = 'temp_attendences';
+    protected $table = 'loan_payment_fails';
     protected $guarded = [];
 }

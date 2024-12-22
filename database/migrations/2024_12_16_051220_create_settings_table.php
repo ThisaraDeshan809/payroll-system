@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('temp_attendences', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('emp_id');
-            $table->string('name');
-            $table->string('department');
-            $table->string('date');
-            $table->string('shift');
-            $table->string('check_in');
-            $table->string('check_out');
-            $table->string('duration');
+            $table->string('title')->nullable();
+            $table->string('value');
         });
     }
 
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('temp_attendences');
+        Schema::dropIfExists('settings');
     }
 };
