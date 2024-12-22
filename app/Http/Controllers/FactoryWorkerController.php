@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-
 use App\Models\Loan;
 use App\Models\LoanPayment;
 use App\Models\LoanPaymentFail;
