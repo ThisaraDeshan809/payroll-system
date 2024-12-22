@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('temp_attendences', function (Blueprint $table) {
+        Schema::create('salary_advances', function (Blueprint $table) {
             $table->id();
             $table->integer('emp_id');
-            $table->string('name');
-            $table->string('department');
-            $table->string('date');
-            $table->string('shift');
-            $table->string('check_in');
-            $table->string('check_out');
-            $table->string('duration');
+            $table->double('amount',14,2);
+            $table->string('status')->default('requested');
+            $table->string('month');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('temp_attendences');
+        Schema::dropIfExists('salary_advances');
     }
 };

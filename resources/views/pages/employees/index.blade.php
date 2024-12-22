@@ -835,6 +835,7 @@
                         if (response.success === true) {
                             $('#uploadModal').modal('hide');
                             toastr.success(response.message);
+                            tbl_employees.ajax.reload();
                         } else {
                             toastr.error(response.message);
                         }

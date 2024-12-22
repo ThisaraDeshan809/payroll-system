@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Imports\EmployeeImport;
 use App\Models\Business;
 use App\Models\Category;
 use App\Models\Designation;
@@ -45,6 +44,9 @@ class EmployeeController extends Controller
 
             foreach ($rows as $key => $row) {
                 if ($key === 0)
+                    continue;
+
+                if ($row[1] === null)
                     continue;
 
                 $if_ot = 0;
