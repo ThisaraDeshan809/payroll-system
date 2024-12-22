@@ -46,6 +46,7 @@ class FactoryWorkerController extends Controller
         $employee_id = $request->id;
         $is_funeral = $request->is_funeral;
         $month = $request->month;
+
         $employee = Employee::where('id', $employee_id)->first();
         $employee_attendances = TempAttendance::where('emp_id', $employee->emp_id)->get();
 
@@ -68,11 +69,6 @@ class FactoryWorkerController extends Controller
         $total_attendance_duration = 0; // Total attendance duration in hours
         $late_durations = 0; // Store late durations
 
-        $weekdays_both_conditions_count = 0;
-
-        // Tracking Sundays
-        $sunday_hours_count = 0;
-
         foreach ($employee_attendances as $attendance) {
             $check_in = $attendance->check_in ? Carbon::parse($attendance->check_in) : null;
             $check_out = $attendance->check_out ? Carbon::parse($attendance->check_out) : null;
@@ -86,11 +82,6 @@ class FactoryWorkerController extends Controller
             $attendance_date = $attendance->date;
             $is_weekday = Carbon::parse($attendance_date)->isWeekday();
             $is_sunday = Carbon::parse($attendance_date)->isSunday();
-            $duration = $attendance->duration ? Carbon::parse($attendance->duration) : null;
-
-            $attendance_date = $attendance->date;
-            $is_weekday = Carbon::parse($attendance_date)->isWeekday();
-            $is_sunday = Carbon::parse($attendance_date)->isSunday(); // Check if the date is Sunday
 
             $is_early_check_in = $check_in && $check_in->lessThan(Carbon::createFromTime(8, 45));
             $is_late_check_out = $check_out && $check_out->greaterThan(Carbon::createFromTime(17, 30));
@@ -117,9 +108,6 @@ class FactoryWorkerController extends Controller
                 if ($parsed_duration->greaterThan(Carbon::createFromTime(4, 0)) && $parsed_duration->lessThan(Carbon::createFromTime(8, 0))) {
                     $half_day_count++;
                 }
-
-            if ($duration && $duration->greaterThan(Carbon::createFromTime(4, 0, 0)) && $duration->lessThan(Carbon::createFromTime(8, 0, 0))) {
-                $half_day_count++;
             }
 
             if ($ot_check_out) {
@@ -147,10 +135,6 @@ class FactoryWorkerController extends Controller
                 $late_start = Carbon::createFromTime(8, 30);
                 $late_duration = $check_in->diffInMinutes($late_start)/60; // Late duration in minutes
                 $late_durations += $late_duration; // Store the late duration
-            }
-
-                $work_duration = $check_out->diffInHours($check_in);
-                $sunday_hours_count += $work_duration;
             }
         }
 
@@ -228,21 +212,6 @@ class FactoryWorkerController extends Controller
         }
 
         $full_salary_with_loan = $full_salary - $loan_deduction_amount - $guaranter_loan_amount;
-        $sundays_salary_amount = ($employee->daily_salary/8) * 1.5 * $sunday_hours_count;
-
-        if ($weekdays_both_conditions_count >= 23) {
-            $attendance_allowance = Settings::where('title', 'attendance_allowance')->first()->value;
-        }
-
-        if($both_conditions_count >= 25) {
-            $fixed_allowance = $employee->allowance_1;
-        }
-
-        if($employee->designation == 'Supervisor' && $both_conditions_count == 10) {
-            $supervisor_allowance = $employee->supervisor_allowance;
-        }
-
-        $full_salary = $full_day_salary_amount + $half_day_salary_amount + $total_ot_salary + $attendance_allowance + $sundays_salary_amount + $fixed_allowance + $supervisor_allowance;
 
         dd([
             'total_ot_salary' => $total_ot_salary,
@@ -255,7 +224,7 @@ class FactoryWorkerController extends Controller
             'fixed_allowance' => $fixed_allowance,
             'supervisor_allowance' => $supervisor_allowance,
             'attendance_allowance' => $attendance_allowance,
-            'full_salary_with_loan' => $full_salary_with_loan,
+            'full_salary_with_loan' => $full_salary_with_loan
         ]);
     }
 }
