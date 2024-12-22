@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-<<<<<<< HEAD
+
 use App\Models\Loan;
 use App\Models\LoanPayment;
 use App\Models\LoanPaymentFail;
 use App\Models\SalaryAdvance;
-=======
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
 use App\Models\Settings;
 use App\Models\TempAttendance;
 use Carbon\Carbon;
@@ -47,12 +45,8 @@ class FactoryWorkerController extends Controller
     public function calculate_factory_worker_salary(Request $request)
     {
         $employee_id = $request->id;
-<<<<<<< HEAD
         $is_funeral = $request->is_funeral;
         $month = $request->month;
-
-=======
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
         $employee = Employee::where('id', $employee_id)->first();
         $employee_attendances = TempAttendance::where('emp_id', $employee->emp_id)->get();
 
@@ -65,7 +59,6 @@ class FactoryWorkerController extends Controller
         $attendance_allowance = 0;
         $fixed_allowance = 0;
         $supervisor_allowance = 0;
-<<<<<<< HEAD
         $funeral_fund_amount = 225;
         $loan_deduction_amount = 0;
         $guaranter_loan_amount = 0;
@@ -75,18 +68,15 @@ class FactoryWorkerController extends Controller
         $sunday_hours_count = 0;
         $total_attendance_duration = 0; // Total attendance duration in hours
         $late_durations = 0; // Store late durations
-=======
 
         $weekdays_both_conditions_count = 0;
 
         // Tracking Sundays
         $sunday_hours_count = 0;
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
 
         foreach ($employee_attendances as $attendance) {
             $check_in = $attendance->check_in ? Carbon::parse($attendance->check_in) : null;
             $check_out = $attendance->check_out ? Carbon::parse($attendance->check_out) : null;
-<<<<<<< HEAD
 
             // Calculate attendance duration in hours
             if ($check_in && $check_out) {
@@ -97,13 +87,11 @@ class FactoryWorkerController extends Controller
             $attendance_date = $attendance->date;
             $is_weekday = Carbon::parse($attendance_date)->isWeekday();
             $is_sunday = Carbon::parse($attendance_date)->isSunday();
-=======
             $duration = $attendance->duration ? Carbon::parse($attendance->duration) : null;
 
             $attendance_date = $attendance->date;
             $is_weekday = Carbon::parse($attendance_date)->isWeekday();
             $is_sunday = Carbon::parse($attendance_date)->isSunday(); // Check if the date is Sunday
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
 
             $is_early_check_in = $check_in && $check_in->lessThan(Carbon::createFromTime(8, 45));
             $is_late_check_out = $check_out && $check_out->greaterThan(Carbon::createFromTime(17, 30));
@@ -125,16 +113,14 @@ class FactoryWorkerController extends Controller
                 }
             }
 
-<<<<<<< HEAD
             if ($duration = $attendance->duration) {
                 $parsed_duration = Carbon::parse($duration);
                 if ($parsed_duration->greaterThan(Carbon::createFromTime(4, 0)) && $parsed_duration->lessThan(Carbon::createFromTime(8, 0))) {
                     $half_day_count++;
                 }
-=======
+
             if ($duration && $duration->greaterThan(Carbon::createFromTime(4, 0, 0)) && $duration->lessThan(Carbon::createFromTime(8, 0, 0))) {
                 $half_day_count++;
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
             }
 
             if ($ot_check_out) {
@@ -153,7 +139,6 @@ class FactoryWorkerController extends Controller
             }
 
             if ($is_sunday && $check_in && $check_out) {
-<<<<<<< HEAD
                 $work_duration = $check_out->diffInMinutes($check_in) / 60;
                 $sunday_hours_count += $work_duration;
             }
@@ -164,16 +149,14 @@ class FactoryWorkerController extends Controller
                 $late_duration = $check_in->diffInMinutes($late_start)/60; // Late duration in minutes
                 $late_durations += $late_duration; // Store the late duration
             }
-=======
+
                 $work_duration = $check_out->diffInHours($check_in);
                 $sunday_hours_count += $work_duration;
             }
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
         }
 
         $full_day_salary_amount = $employee->daily_salary * $both_conditions_count;
         $half_day_salary_amount = ($employee->daily_salary / 2) * $half_day_count;
-<<<<<<< HEAD
         $sundays_salary_amount = ($employee->daily_salary / 8) * 1.5 * $sunday_hours_count;
 
         if (($total_attendance_duration / 8) >= 23) {
@@ -246,7 +229,6 @@ class FactoryWorkerController extends Controller
         }
 
         $full_salary_with_loan = $full_salary - $loan_deduction_amount - $guaranter_loan_amount;
-=======
         $sundays_salary_amount = ($employee->daily_salary/8) * 1.5 * $sunday_hours_count;
 
         if ($weekdays_both_conditions_count >= 23) {
@@ -262,24 +244,19 @@ class FactoryWorkerController extends Controller
         }
 
         $full_salary = $full_day_salary_amount + $half_day_salary_amount + $total_ot_salary + $attendance_allowance + $sundays_salary_amount + $fixed_allowance + $supervisor_allowance;
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
 
         dd([
             'total_ot_salary' => $total_ot_salary,
             'both_conditions_count' => $both_conditions_count,
             'weekdays_both_conditions_count' => $weekdays_both_conditions_count,
             'sunday_hours_count' => $sunday_hours_count,
-<<<<<<< HEAD
             'total_attendance_duration' => round($total_attendance_duration / 8, 2), // Total duration rounded to 2 decimal places
             'late_durations' => $late_durations,
             'full_salary' => $full_salary,
             'fixed_allowance' => $fixed_allowance,
             'supervisor_allowance' => $supervisor_allowance,
             'attendance_allowance' => $attendance_allowance,
-            'full_salary_with_loan' => $full_salary_with_loan
-=======
-            'full_salary' => $full_salary,
->>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
+            'full_salary_with_loan' => $full_salary_with_loan,
         ]);
     }
 }
