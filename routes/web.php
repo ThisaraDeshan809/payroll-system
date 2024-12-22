@@ -8,7 +8,10 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+<<<<<<< HEAD
 use App\Http\Controllers\SalaryAdvanceController;
+=======
+>>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -83,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
+<<<<<<< HEAD
     Route::controller(SalaryAdvanceController::class)->group(function () {
         Route::prefix('employees/salary-advances')->group(function () {
             Route::get('/', 'index')->name('salaryAdvance.index');
@@ -94,6 +98,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
+=======
+>>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
     Route::controller(LogoutController::class)->group(function () {
         Route::get('/logout', 'perform')->name('logout');
     });

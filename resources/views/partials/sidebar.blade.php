@@ -32,9 +32,12 @@
                     <li>
                         <a href="{{route('loans.index')}}">Employee Loans</a>
                     </li>
+<<<<<<< HEAD
                     <li>
                         <a href="{{route('salaryAdvance.index')}}">Employee Salary Advances</a>
                     </li>
+=======
+>>>>>>> 9c4512d064f548838d68c57c1520b84c074ff65f
                 </ul>
             </li>
             <li>
