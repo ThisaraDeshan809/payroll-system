@@ -436,7 +436,7 @@
                                     <div class="mb-3">
                                         <label for="view_epf_no" class="form-label">Employee EPF No.</label>
                                         <input type="text" class="form-control" id="view_epf_no" name="view_epf_no"
-                                        readonly>
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-8">
@@ -456,14 +456,14 @@
                                     <div class="mb-3">
                                         <label for="view_emp_location" class="form-label">Employee Location</label>
                                         <input type="text" class="form-control" id="view_emp_location"
-                                        name="view_emp_location" readonly>
+                                            name="view_emp_location" readonly>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="view_emp_business" class="form-label">Employee Business</label>
                                         <input type="text" class="form-control" id="view_emp_business"
-                                        name="view_emp_business" readonly>
+                                            name="view_emp_business" readonly>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -514,22 +514,22 @@
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="view_OT" class="form-label">Employee OT</label>
-                                        <input type="text" class="form-control" id="view_OT"
-                                        name="view_OT" readonly>
+                                        <input type="text" class="form-control" id="view_OT" name="view_OT"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="view_emp_category" class="form-label">Employee Category</label>
                                         <input type="text" class="form-control" id="view_emp_category"
-                                        name="view_emp_category" readonly>
+                                            name="view_emp_category" readonly>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="mb-3">
                                         <label for="view_emp_designation" class="form-label">Employee Designation</label>
                                         <input type="text" class="form-control" id="view_emp_designation"
-                                        name="view_emp_designation" readonly>
+                                            name="view_emp_designation" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -712,7 +712,7 @@
 
                         let ot = response.data.OT;
                         let ot_name = 'No';
-                        if(ot === 1) {
+                        if (ot === 1) {
                             ot_name = 'Yes';
                         }
 
@@ -740,6 +740,10 @@
                         empId: empId,
                     },
                     success: function(response) {
+
+                        const empCategory = (response.data.emp_category || '').trim();
+                        const empDesignation = (response.data.designation || '').trim();
+
                         console.log(response.data.emp_category);
                         $('#editEmployeeModal #edit_epf_no').val(response.data.epf_no);
                         $('#editEmployeeModal #edit_emp_name').val(response.data.name);
@@ -748,18 +752,36 @@
                         $('#editEmployeeModal #edit_basic_salary').val(response.data
                             .basic_salary);
                         $('#editEmployeeModal #edit_allowance_1').val(response.data
-                            .allowance_1);
+                        .allowance_1);
                         $('#editEmployeeModal #edit_daily_salary').val(response.data
                             .daily_salary);
                         $('#editEmployeeModal #edit_emp_epf').val(response.data.emp_epf);
                         $('#editEmployeeModal #edit_emp_bank_name').val(response.data
-                            .bank_name);
+                        .bank_name);
                         $('#editEmployeeModal #edit_emp_bank_branch').val(response.data
                             .bank_branch);
                         $('#editEmployeeModal #edit_emp_bank_acc').val(response.data
                             .bank_account_no);
                         $('#editEmployeeModal #edit_emp_bank_acc_name').val(response.data
                             .bank_acc_name);
+                        $('#editEmployeeModal #edit_OT').val(response.data.OT);
+                        $('#editEmployeeModal #edit_emp_location').val(response.data
+                            .loacation_id || '').trigger('change');
+                        console.log("location", response.data);
+                        $('#editEmployeeModal #edit_emp_business').val(response.data
+                            .business_id || '').trigger('change');
+
+                        $('#editEmployeeModal #edit_emp_category option').each(function() {
+                            if ($(this).val().trim() === empCategory) {
+                                $(this).prop('selected', true).trigger('change');
+                            }
+                        });
+
+                        $('#editEmployeeModal #edit_emp_designation option').each(function() {
+                            if ($(this).val().trim() === empDesignation) {
+                                $(this).prop('selected', true).trigger('change');
+                            }
+                        });
 
                         $('#editEmployeeModal #emp_id').val(empId);
                         $('#editEmployeeModal').modal('show');
