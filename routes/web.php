@@ -10,6 +10,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SalaryAdvanceController;
 use App\Http\Controllers\SettingsController;
+use App\Models\Employee;
+use App\Models\Loan;
+use App\Models\SalaryAdvance;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -98,7 +102,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/logout', 'perform')->name('logout');
     });
     Route::get('/', function () {
-        return view('pages.home');
+        $total_employees = Employee::where('deleted_at',null)->count();
+        $total_loans = Loan::all()->count();
+
+        $currentMonth = Carbon::now()->format('Y-m');
+        $total_salary_advances = SalaryAdvance::where('month',$currentMonth)->count();
+        return view('pages.home',compact('total_employees','total_loans','total_salary_advances'));
     });
 });
 

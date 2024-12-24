@@ -113,17 +113,12 @@ class EmployeeController extends Controller
     public function ajax_employee_save(Request $request)
     {
         $request->validate([
-            'epf_no' => 'required',
             'emp_name' => 'required|string',
             'OT' => 'required',
             'emp_category' => 'required',
             'emp_designation' => 'required',
-            'emp_bank_name' => 'required',
             'emp_location' => 'required',
             'emp_business' => 'required',
-            'telephone' => 'required',
-            'emp_bank_branch' => 'required',
-            'emp_bank_acc' => 'required',
         ]);
 
         try{
@@ -181,17 +176,12 @@ class EmployeeController extends Controller
     public function ajax_edit_employee(Request $request)
     {
         $request->validate([
-            'epf_no' => 'required',
             'emp_name' => 'required|string',
             'emp_ot' => 'required',
             'emp_category' => 'required',
             'emp_designation' => 'required',
-            'emp_bank_name' => 'required',
             'emp_location' => 'required',
             'emp_business' => 'required',
-            'telephone' => 'required',
-            'emp_bank_branch' => 'required',
-            'emp_bank_acc' => 'required',
         ]);
 
         try{
